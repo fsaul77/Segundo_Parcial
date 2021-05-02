@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<style>
+    #fecha, #hora1, #hora2, #id_materia{
+    background-color: white;
+    }
+    label{
+    color: white;
+    }
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+            {% for message in messages %}
+            <div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <h3 style="text-align: center; color: lavender;">ACTUALIZAR SESION</h3>
+            <div class="card card-body">
+            <form action="/update_sesiones/{{sesion.0}}" method="POST">
+                <div class="form-group">
+                    <FONT color="black">Fecha:</FONT>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" value="{{sesion.1}}" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <FONT color="black">Hora de Inicio:</FONT>
+                    <label for="horaInicio">Hora de Inicio:</label>
+                    <input type="time" class="form-control" name="hora_inicio" id="hora1" value="{{sesion.2}}" placeholder="Hora de Inicio" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <FONT color="black">Hora de Finalización:</FONT>
+                    <label for="horaFinal">Hora de Finalización:</label>
+                    <input type="time" class="form-control" name="hora_fin" id="hora2" value="{{sesion.3}}" placeholder="Hora de Finalización" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <FONT color="black">Espacio Academico:</FONT>
+                    <label for="">Espacio Academico:</label>
+                    <select class="form-control" name="id_materia" id="id_materia">
+                        {% for materia1 in materias3 %}
+                        <option value="{{ materia1.1 }}">{{ materia1.1}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <button class="btn btn-primary btn-block">Actualizar </button>
+                <button type="submit" class="btn btn-danger btn-block">
+                    <span class="spinner-grow spinner-grow-sm"></span>
+                    Cancelar
+                </button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

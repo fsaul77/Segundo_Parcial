@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<style>
+	#fecha, #hora1, #hora2, #id_materia{
+		background-color: white;
+	}
+	label{
+		color: white;
+	}
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+            {% for message in messages %}
+            <div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <h3 style="text-align: center; color: lavender;">CREAR SESION</h3>
+            <div class="card card-body">
+                <form action="{{url_for('add_reserva')}}" method="POST">
+                    <div class="form-group">
+                        <FONT color="black">Fecha:</FONT>
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <FONT color="black">Hora de Inicio:</FONT>
+                        <label for="horaInicio">Hora de Inicio:</label>
+                        <input type="time" class="form-control" name="hora_inicio" id="hora1" placeholder="Hora de Inicio" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                            <FONT color="black">Hora de Finalización:</FONT>
+                            <label for="horaFinal">Hora de Finalización:</label>
+                            <input type="time" class="form-control" name="hora_fin" id="hora2" placeholder="Hora de Finalización" autocomplete="off" required>
+					</div>
+                    <div class="form-group">
+                        <FONT color="black">Espacio Academico:</FONT>
+                        <label for="espacioAcademico">Espacio Academico:</label>
+                        <select class="form-control" name="id_materia" id="id_materia" required>
+                        <option select value="">Seleccione Espacio Academico</option>
+                        {% for materia in materias2 %}
+                        <option value="{{ materia.1 }}">{{ materia.1}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary btn-block">Guardar</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h3 style="text-align: center; color: lavender;">VISUALIZANDO SESIONES CREADAS</h3>
+            <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                <thead>
+                    <tr>
+                        <td>N°</td>
+                        <td>Fecha</td>
+                        <td>Hora Inicio</td>
+                        <td>Hora Fin</td>
+                        <td>Espacio Academico</td>
+                        <td>Opciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lista in reserva %}
+                    <tr>
+                        <td>{{lista.0}}</td>
+                        <td>{{lista.1}}</td>
+                        <td>{{lista.2}}</td>
+                        <td>{{lista.3}}</td>
+                        <td>{{lista.4}}</td>
+                        <td>
+                        <a href="/edit_sesiones/{{lista.0}}" class="btn btn-outline-warning">Editar</a>
+                        <a href="/delete_sesion/{{lista.0}}" class="btn btn-danger btn-delete">Eliminar</a>
+                        <a href="/ver/{{lista.0}}" class="btn btn-primary">Ver</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

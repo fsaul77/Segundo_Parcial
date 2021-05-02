@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container">
+    <div class="col-md-16">
+        <h3 style="text-align: center; color: lavender;">DATOS DE LA SESION</h3>
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+                <tr>
+                    <td>SESION</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lista in sesiones %}
+                <tr>
+                    <td href="/ver/{{lista.0}}">{{lista}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3 style="text-align: center; color: lavender;">CONTROL DE ASISTENCIA</h3>
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+                <tr>
+                    <td>ESTUDIANTES</td>
+                    <td>ASISTENCIA</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lista2 in estudiantes %}
+                <tr>
+                    <td href="/ver">{{lista2.1, lista2.2, lista2.3}}</td>
+                    <td>
+                        <label><input type="checkbox" name="areatrabajo" value=""> SI </label>
+                        <label><input type="checkbox" name="areatrabajo" value=""> NO </label>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-danger">Salir</button>
+    </div>
+</div>
+
+{% endblock %}

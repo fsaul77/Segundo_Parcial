@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <h3 style="text-align: center; color: lavender;">ACTUALIZAR ESPACIO ACADEMICO</h3>
+      <div class="card card-body">
+        <form action="/updateM/{{materias.0}}" method="POST">
+          <div class="form-group">
+            <input type="text" name="nombre" value="{{materias.1}}" class="form-control">
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="semestre" id="id_semestre" value="{{materias.2}}">
+              <option selected value="{{materias.2}}">{{materias.2}}</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Actualizar
+            </button>
+            <button type="submit" class="btn btn-danger btn-block">
+              <span class="spinner-grow spinner-grow-sm"></span>
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
